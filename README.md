@@ -1,4 +1,2 @@
-This is smart medicine reminder system web application which gives reminder to the elderly people to take the medicines on time.
-Its used HTML,CSS,JS,JSON NPM MODULES, SERVER,JS , 
-Database json file
+Smart Medicine Reminder System is a modern full-stack web application designed to help users manage and track their medication schedules efficiently. The system provides smart reminders, voice alerts, and an interactive dashboard where users can add medicines, monitor their status, and receive notifications when it is time to take a dose. Built using HTML, CSS, JavaScript, Node.js, and Express, the application uses automatic local JSON storage instead of a traditional database, making it lightweight and easy to run without any complex setup. This approach ensures that users can quickly deploy and use the system while maintaining a clean and user-friendly interface suitable for elderly users and caregivers.
 
