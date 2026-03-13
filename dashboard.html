@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Medicine Reminder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="alert-banner" id="caregiverAlert">
+        <i class="fas fa-exclamation-triangle"></i> Alert: Medicine dose missed. Caregiver notification sent.
+    </div>
+
+    
+    <div class="glass-card reminder-popup" id="reminderPopup">
+        <h3 style="margin-top:0"><i class="fas fa-bell" style="color:var(--warning)"></i> Time to take medicine!</h3>
+        <p id="remindMedicineName" style="font-size:1.2rem; font-weight:600; margin-bottom: 0.5rem"></p>
+        <p id="remindDosage" style="margin-bottom: 1rem; color:var(--text-muted)"></p>
+        <div class="flex-gap">
+            <button class="btn btn-success" id="btnTakeMedicine">Mark Taken</button>
+            <button class="btn btn-secondary" id="btnSnooze">Snooze (2m)</button>
+        </div>
+    </div>
+
+    <div class="dashboard-layout">
+       
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-heartbeat" style="color:var(--primary-color)"></i> MedSmart</h2>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem" id="welcomeUser"></div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" data-view="dashboard-view"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="#" data-view="add-medicine-view" id="btnAddMedicineSidebar"><i class="fas fa-plus-circle"></i> Add Medicine</a></li>
+                <li><a href="#" data-view="medicine-list-view"><i class="fas fa-list"></i> Medicine List</a></li>
+                <li><a href="#" data-view="settings-view"><i class="fas fa-cog"></i> Settings</a></li>
+                <li style="margin-top:auto"><a href="#" id="btnLogout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        
+        <main class="main-content">
+            <div class="header-top">
+                <h1 id="pageTitle">Dashboard</h1>
+                <div id="currentTime" style="font-size:1.2rem; font-weight:500;"></div>
+            </div>
+
+            <div id="dashboard-view" class="view-section">
+                <div class="analytics-grid">
+                    <div class="glass-card stat-card">
+                        <i class="fas fa-pills fa-2x" style="color:var(--info); margin-bottom:0.5rem"></i>
+                        <div class="stat-value" id="statTotal">0</div>
+                        <div style="color:var(--text-muted)">Total Medicines</div>
+                    </div>
+                    <div class="glass-card stat-card">
+                        <i class="fas fa-check-circle fa-2x" style="color:var(--success); margin-bottom:0.5rem"></i>
+                        <div class="stat-value" id="statTaken">0</div>
+                        <div style="color:var(--text-muted)">Taken Today</div>
+                    </div>
+                    <div class="glass-card stat-card">
+                        <i class="fas fa-times-circle fa-2x" style="color:var(--danger); margin-bottom:0.5rem"></i>
+                        <div class="stat-value" id="statMissed">0</div>
+                        <div style="color:var(--text-muted)">Missed Medicines</div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="margin-top:2rem">
+                    <h3>Upcoming Schedule</h3>
+                    <div class="table-container">
+                        <table class="modern-table" id="upcomingTable">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Medicine</th>
+                                    <th>Dosage</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+          
+            <div id="medicine-list-view" class="view-section" style="display:none">
+                <div class="glass-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem">
+                        <h3>Your Medications</h3>
+                        <button class="btn btn-small" id="btnQuickAdd"><i class="fas fa-plus"></i> Add New</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="modern-table" id="medicineTable">
+                            <thead>
+                                <tr>
+                                    <th>Medicine Name</th>
+                                    <th>Dosage</th>
+                                    <th>Time</th>
+                                    <th>Frequency</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+          
+            <div id="settings-view" class="view-section" style="display:none">
+                <div class="glass-card">
+                    <h3>Accessibility Features</h3>
+                    <p style="color:var(--text-muted); margin-bottom: 1rem">Tailor the application to your needs especially designed for elderly users.</p>
+                    <div class="accessibility-panel">
+                        <label class="toggle-group">
+                            <input type="checkbox" id="toggleLargeFont"> Large Font
+                        </label>
+                        <label class="toggle-group">
+                            <input type="checkbox" id="toggleDarkMode" checked> Dark Mode
+                        </label>
+                        <label class="toggle-group">
+                            <input type="checkbox" id="toggleHighContrast"> High Contrast
+                        </label>
+                        <label class="toggle-group">
+                            <input type="checkbox" id="toggleVoiceAlerts" checked> Voice Reminders
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+           
+            <div id="add-medicine-view" class="view-section" style="display:none">
+            </div>
+
+        </main>
+    </div>
+
+
+    <div class="modal-overlay" id="addMedicineModal">
+        <div class="glass-card modal-content">
+            <div class="modal-header">
+                <h3 style="margin:0">Add New Medicine</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="addMedicineForm">
+                <div class="form-group">
+                    <label>Medicine Name</label>
+                    <input type="text" id="medName" class="form-control" required placeholder="e.g. Aspirin">
+                </div>
+                <div class="form-group">
+                    <label>Dosage</label>
+                    <input type="text" id="medDosage" class="form-control" required placeholder="e.g. 1 Pill">
+                </div>
+                <div class="form-group" style="display:flex; gap:1rem">
+                    <div style="flex:1">
+                        <label>Time</label>
+                        <input type="time" id="medTime" class="form-control" required>
+                    </div>
+                    <div style="flex:1">
+                        <label>Frequency</label>
+                        <select id="medFrequency" class="form-control" required>
+                            <option value="Daily">Daily</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="As Needed">As Needed</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem">
+                    <button type="button" class="btn btn-secondary" style="width:auto; margin-top:0" id="cancelModal">Cancel</button>
+                    <button type="submit" class="btn" style="width:auto">Save Medicine</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
